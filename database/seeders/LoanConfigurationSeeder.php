@@ -9,7 +9,7 @@ class LoanConfigurationSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('loan_configurations')->insert([
+        DB::table('loan_configurations')->upsert([
             [
                 'key' => 'mpesa_till_number',
                 'value' => '123456',
@@ -64,6 +64,6 @@ class LoanConfigurationSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-        ]);
+        ], ['key'], ['value', 'group', 'description', 'is_encrypted', 'updated_at']);
     }
 }

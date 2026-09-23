@@ -9,7 +9,7 @@ class LoanTypesSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('loan_types')->insert([
+        DB::table('loan_types')->upsert([
             [
                 'name' => 'Personal Loan',
                 'slug' => 'personal',
@@ -90,6 +90,19 @@ class LoanTypesSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+        ], ['slug'], [
+            'name',
+            'description',
+            'min_amount',
+            'max_amount',
+            'interest_rate',
+            'processing_fee',
+            'min_tenure_months',
+            'max_tenure_months',
+            'requires_guarantor',
+            'requires_collateral',
+            'is_active',
+            'updated_at',
         ]);
     }
 }
